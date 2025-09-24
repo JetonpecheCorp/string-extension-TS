@@ -27,3 +27,23 @@ let chaine = "10/01/2020 10:00:00";
 
 let date = chaine.toDate();
 ```
+
+## toBase64
+
+Permet de convertir une chaine de caractère en base 64
+
+```js
+let chaine = "Salut j'étais pas là";
+
+let base64 = chaine.toBase64();
+```
+
+## fromBase64
+
+Permet de convertir un base64 en chaine de caractère
+
+```js
+let base64 = "SOngbPQ=";
+
+let chaine = base64.fromBase64();
+```

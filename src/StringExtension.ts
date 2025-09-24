@@ -14,7 +14,21 @@ declare global {
          * Convertir un string en une instance date  
          * Le format Français (JJ/MM/AAAA) est accepté
          */
-        toDate(): Date
+        toDate(): Date,
+
+        /**
+         * Convertir la chaîne de caractère en base 64
+         * 
+         * @returns La chaîne convertit en base 64
+         */
+        toBase64(): string | null,
+
+        /**
+         * Convertir la chaîne en base 64 en chaîne de caractère
+         * 
+         * @returns La chaîne base 64 convertit en chaîne de caractère
+         */
+        fromBase64(): string | null
     }
 }
 
@@ -65,6 +79,36 @@ String.prototype.toDate = function(): Date
     }
 
     return new Date(dateString as any);
+}
+
+String.prototype.toBase64 = function(): string | null
+{
+    if(this.length == 0)
+        return null;
+
+    try 
+    {
+        return btoa(this as string);
+    } 
+    catch (error) 
+    {
+        return null;
+    }
+}
+
+String.prototype.fromBase64 = function(): string | null
+{
+    if(this.length == 0 || this[this.length - 1] != "=")
+        return null;
+
+    try 
+    {
+        return atob(this as string);
+    } 
+    catch (error) 
+    {
+        return null;    
+    }
 }
 
 export {}
