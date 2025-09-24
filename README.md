@@ -47,3 +47,23 @@ let base64 = "SOngbPQ=";
 
 let chaine = base64.fromBase64();
 ```
+
+## toTitleCase
+
+Permet de mettre la 1ere lettre de chaque mot en majuscule
+
+```js
+let chaine = "je suis un titre";
+
+let retour = chaine.toTitleCase();
+```
+
+## toSentenceCase
+
+Permet de mettre la 1ere lettre de chaque phrase en majuscule
+
+```js
+let chaine = "je suis un titre. mais moi aussi!a bon?oui.ok";
+
+let retour = chaine.toSentenceCase();
+```

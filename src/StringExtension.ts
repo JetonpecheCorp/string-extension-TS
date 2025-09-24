@@ -28,7 +28,17 @@ declare global {
          * 
          * @returns La chaîne base 64 convertit en chaîne de caractère
          */
-        fromBase64(): string | null
+        fromBase64(): string | null,
+
+        /**
+         * Mettre la première lettre de chaque mot en majuscule
+         */
+        toTitleCase(): string,
+
+        /**
+         * Mettre la première lettre de chaque phrase en majuscule
+         */
+        toSentenceCase(): string
     }
 }
 
@@ -109,6 +119,22 @@ String.prototype.fromBase64 = function(): string | null
     {
         return null;    
     }
+}
+
+String.prototype.toTitleCase = function(_firstLetterSentence: boolean = false): string
+{
+    if(this.length == 0)
+        return this as string;
+
+    return this.replace(/(^|\s|\.\s*|\?\s*)\S/g, x =>  x.toUpperCase());
+}
+
+String.prototype.toSentenceCase = function(): string
+{
+    if(this.length == 0)
+        return this as string;
+
+    return this.replace(/(^|\.\s*|!\s*|\?\s*)[a-zà-ÿ]/g, x => x.toUpperCase());
 }
 
 export {}
