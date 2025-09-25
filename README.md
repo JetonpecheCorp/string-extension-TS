@@ -73,7 +73,7 @@ let retour = chaine.toSentenceCase();
 Permet de compter le nombre de mot
 
 ```js
-let chaine = "je suis un titre text. Je suis super long!";
+let chaine = "je suis un text. Je suis 1er Jean-michel !";
 
 let nb = chaine.countWord();
 ```
