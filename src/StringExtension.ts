@@ -147,7 +147,7 @@ String.prototype.countWord = function(): number
     if(this.length == 0)
         return 0;
 
-    return this.match(/[a-zA-Zà-ÿ]+/g)?.length ?? 0;
+    return this.match(/[a-zA-Zà-ÿ0-9'-]+/g)?.length ?? 0;
 }
 
 export {}
