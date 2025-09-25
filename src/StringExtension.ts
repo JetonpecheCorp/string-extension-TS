@@ -55,19 +55,10 @@ String.prototype.equals = function(_string: string, _cultureInfo: "ignoreCase" |
             return this === _string;
 
         case "ignoreCase":
-            return this.toLowerCase() === _string.toLowerCase();
+            return this.localeCompare(_string, undefined, { sensitivity: "accent" }) == 0;
         
         case "ignoreCaseAndAccent":
-            /**
-             * Supprimer les accents
-             * 
-             * decomposer les caracteres accentués  
-             * exemple: "é" devient "e" et "accent du e"
-             * 
-             * replace => permet de supprimer les accents du decomposeur de la chaine
-             */
-            const normalize = (str: string) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            return normalize(this.toLowerCase()) === normalize(_string.toLowerCase());
+            return this.localeCompare(_string, undefined, { sensitivity: "base" }) == 0;
 
         default:
             throw new Error("Le paramètre cultureInfo doit être 'ignoreCase', 'ignoreCaseAndAccent' ou 'exact'");
