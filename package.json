@@ -7,6 +7,9 @@
   "files": [
     "dist"
   ],
+  "scripts": {
+    "deploy": "npm link && tsc && npm publish"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/JetonpecheCorp/string-extension-TS.git"
