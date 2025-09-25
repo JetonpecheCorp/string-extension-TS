@@ -67,3 +67,13 @@ let chaine = "je suis un titre. mais moi aussi!a bon?oui.ok";
 
 let retour = chaine.toSentenceCase();
 ```
+
+## countWord
+
+Permet de compter le nombre de mot
+
+```js
+let chaine = "je suis un titre text. Je suis super long!";
+
+let nb = chaine.countWord();
+```

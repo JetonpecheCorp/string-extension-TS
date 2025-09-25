@@ -39,6 +39,11 @@ declare global {
          * Mettre la première lettre de chaque phrase en majuscule
          */
         toSentenceCase(): string
+
+        /**
+         * Compter le nombre de mot
+         */
+        countWord(): number
     }
 }
 
@@ -135,6 +140,14 @@ String.prototype.toSentenceCase = function(): string
         return this as string;
 
     return this.replace(/(^|\.\s*|!\s*|\?\s*)[a-zà-ÿ]/g, x => x.toUpperCase());
+}
+
+String.prototype.countWord = function(): number
+{
+    if(this.length == 0)
+        return 0;
+
+    return this.match(/[a-zA-Zà-ÿ]+/g)?.length ?? 0;
 }
 
 export {}
