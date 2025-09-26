@@ -1,6 +1,6 @@
 {
   "name": "@jetonpeche/string-extension",
-  "version": "1.0.71",
+  "version": "1.0.72",
   "description": "Ajout de methodes d'extension au type String",
   "author": "jetonpeche",
   "main": "dist/StringExtension.js",
@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "deploy": "npm link && tsc && npm publish"
+    "build": "npm link && tsc && npm publish"
   },
   "repository": {
     "type": "git",

@@ -31,6 +31,13 @@ declare global {
         fromBase64(): string | null,
 
         /**
+         * Convertir la chaîne en base 64 en object
+         * 
+         * @returns La chaîne base 64 convertit en object
+         */
+        fromBase64<T>(): T,
+        
+        /**
          * Mettre la première lettre de chaque mot en majuscule
          */
         toTitleCase(): string,
@@ -102,9 +109,19 @@ String.prototype.toBase64 = function(): string | null
     }
 }
 
+String.prototype.fromBase64 = function<T>(): T | null
+{
+    let info = this.fromBase64();
+
+    if(info === null)
+        return null;
+
+    return JSON.parse(info);
+}
+
 String.prototype.fromBase64 = function(): string | null
 {
-    if(this.length == 0 || this[this.length - 1] != "=")
+    if(this.length == 0 || this.length % 4 != 0)
         return null;
 
     try 

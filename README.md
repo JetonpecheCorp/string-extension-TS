@@ -40,12 +40,14 @@ let base64 = chaine.toBase64();
 
 ## fromBase64
 
-Permet de convertir un base64 en chaine de caractère
+Permet de convertir un base64 en chaine de caractère  
+ou un object
 
 ```js
 let base64 = "SOngbPQ=";
 
 let chaine = base64.fromBase64();
+let object = base64.fromBase64<Personne>();
 ```
 
 ## toTitleCase
