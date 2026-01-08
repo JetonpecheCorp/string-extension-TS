@@ -1,5 +1,21 @@
 # Methode d'extension string
 
+## isNullOrWhiteSpace
+Permet de savoir si la chaîne est composé que d'espace ou null / undefined
+
+```js
+    let chaine1 = " ";
+    let chaine2 = "\t";
+    let chaine3 = "\u3000";
+    let chaine4 = " Salut ";
+
+    String.isNullOrWhiteSpace(chaine1);
+    String.isNullOrWhiteSpace(chaine2);
+    String.isNullOrWhiteSpace(chaine3);
+    String.isNullOrWhiteSpace(chaine4);
+```
+
+
 ## equals
 
 Permet de comparer deux chaines de caractère

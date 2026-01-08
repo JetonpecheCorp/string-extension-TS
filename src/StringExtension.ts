@@ -52,6 +52,20 @@ declare global {
          */
         countWord(): number
     }
+
+    interface StringConstructor
+    {
+        /**
+         * Contrôler si la chaîne est composé que d'espace ou null / undefined
+         * @param _string chaine à tester
+         */
+        isNullOrWhiteSpace(_string: string | null | undefined): boolean
+    }
+}
+
+String.isNullOrWhiteSpace = function(_string: string | null | undefined)
+{
+    return !_string || _string.trim().length == 0;
 }
 
 String.prototype.equals = function(_string: string, _cultureInfo: "ignoreCase" | "ignoreCaseAndAccent" | "exact"): boolean
