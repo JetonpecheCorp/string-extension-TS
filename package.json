@@ -1,24 +1,35 @@
 {
   "name": "@jetonpeche/string-extension",
-  "version": "1.0.73",
-  "description": "Ajout de methodes d'extension au type String",
+  "version": "1.1.0",
+  "description": "Useful extension methods for the native String prototype in TypeScript and JavaScript",
   "author": "jetonpeche",
   "main": "dist/StringExtension.js",
+  "types": "dist/StringExtension.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "npm link && tsc && npm publish"
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/JetonpecheCorp/string-extension-TS.git"
+    "url": "git+https://github.com/JetonpecheCorp/string-extension-TS.git"
   },
-  "keywords": ["string", "extension"],
+  "homepage": "https://github.com/JetonpecheCorp/string-extension-TS#readme",
+  "keywords": [
+    "string",
+    "extension",
+    "prototype",
+    "utilities",
+    "slug",
+    "truncate",
+    "formatting"
+  ],
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "@types/node": "^24.5.2",
+    "@types/node": "^24.19.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
   }

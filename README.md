@@ -15,7 +15,6 @@ Permet de savoir si la chaîne est composé que d'espace ou null / undefined
     String.isNullOrWhiteSpace(chaine4);
 ```
 
-
 ## equals
 
 Permet de comparer deux chaines de caractère
@@ -94,4 +93,70 @@ Permet de compter le nombre de mot
 let chaine = "je suis un text. Je suis 1er Jean-michel !";
 
 let nb = chaine.countWord();
+```
+
+## truncate
+Coupe une chaine de caractères
+
+```js
+let chaine = "Bonjour tout le monde !";
+
+chaine.truncate(10); // "Bonjoi..."
+chaine.truncate(10, "…"); // "Bonjour t…"
+```
+
+## mask
+Permet de masquer une donnée sensible (numéro de carte, téléphone, e-mail) en conservant des caractères visibles au début et/ou à la fin.
+
+```js
+let telephone = "0612345678";
+telephone.mask(2, 2); // "06******78"
+telephone.mask(0, 4); // "******5678"
+
+let rib = "FR761234567890";
+rib.mask(4, 2, "X"); // "FR76XXXXXXXX90"
+```
+
+## toSlug
+Permet de convertir une chaîne de caractères en slug d'URL propre (supprime accents, caractères spéciaux, espaces superflus).  
+Un séparateur personnalisé peut être fourni en option (par défaut `-`).
+
+```js
+let chaine1 = "L'été à Paris : un vrai régal !";
+chaine1.toSlug(); // "l-ete-a-paris-un-vrai-regal"
+
+let chaine2 = "Article #42 -- Version Finale_v2";
+chaine2.toSlug(); // "article-42-version-finale-v2"
+
+// Avec séparateur personnalisé :
+chaine1.toSlug("_"); // "l_ete_a_paris_un_vrai_regal"
+```
+
+## toCamelCase
+
+Convertit une chaîne en format `camelCase`.
+
+```js
+"hello world".toCamelCase();      // "helloWorld"
+"user-first-name".toCamelCase();  // "userFirstName"
+"user_last_name".toCamelCase();   // "userLastName"
+"Créé Par Utilisateur".toCamelCase(); // "creeParUtilisateur"
+```
+
+## toKebabCase
+Convertit une chaîne en format `kebab-case`.
+
+```js
+"helloWorld".toKebabCase();      // "hello-world"
+"User First Name".toKebabCase(); // "user-first-name"
+"user_api_key".toKebabCase();    // "user-api-key"
+```
+
+## toSnakeCase
+Convertit une chaîne en format `snake_case`.
+
+```js
+"helloWorld".toSnakeCase();      // "hello_world"
+"user-first-name".toSnakeCase(); // "user_first_name"
+"User Profile Data".toSnakeCase(); // "user_profile_data"
 ```

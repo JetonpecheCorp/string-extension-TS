@@ -4,6 +4,7 @@
     "module": "node16", 
     "outDir": "./dist",
     "rootDir": "./src",
+    "types": ["node"],
     "declaration": true,
     "strict": true, 
     "esModuleInterop": true,
