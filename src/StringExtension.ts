@@ -28,12 +28,14 @@ declare global
         toBase64(): string | null;
 
         /**
-         * Decodes a Base64 string back into a plain UTF-8 string, or parses it as JSON if a generic type is provided.
+         * Decodes a Base64 string back into a plain UTF-8 string.
+         * If `_parseJson` is true, it attempts to parse the decoded string as JSON.
          * 
+         * @param _parseJson - If true, tries to parse the result as JSON. Defaults to false.
          * @template T - The target type if the decoded string is expected to be a JSON object.
          * @returns The decoded string or parsed object, or `null` if decoding fails.
          */
-        fromBase64<T = string>(): T | string | null;
+        fromBase64<T = string>(_parseJson?: boolean): T | string | null;
 
         /**
          * Capitalizes the first letter of each word in the string.
@@ -152,20 +154,25 @@ String.prototype.toDate = function (): Date
     {
         let parties = this.split(" ");
 
-        // date et heure
+        // Date et heure
         if (parties.length > 1)
         {
-            dateChaine = `${parties[0].split("/").reverse().join("-")} `;
-            parties.shift();
-            dateChaine += parties.join(" ");
+            // Inverse la date (DD/MM/YYYY devient YYYY-MM-DD)
+            const dateISO = parties[0].split("/").reverse().join("-");
+            parties.shift(); // Retire la date du tableau
+            
+            // Reconstruit la partie heure et fusionne avec un "T"
+            const heureISO = parties.join(" ");
+            dateChaine = `${dateISO}T${heureISO}`;
         } 
         else
         {
+            // Seulement la date
             dateChaine = this.split("/").reverse().join("-");
         }
     }
 
-    return new Date(dateChaine as any);
+    return new Date(dateChaine);
 };
 
 String.prototype.toBase64 = function (): string | null
@@ -179,7 +186,7 @@ String.prototype.toBase64 = function (): string | null
         if (typeof Buffer !== "undefined")
             return Buffer.from(this.toString(), "utf-8").toString("base64");
 
-        // Support Navigateur avec encodage UTF-8 (pour gérer les accents sans lever d'erreur btoa)
+        // Support Navigateur avec encodage UTF-8
         const octets = new TextEncoder().encode(this.toString());
         const chaineBinaire = Array.from(octets, (octet) => String.fromCharCode(octet)).join("");
 
@@ -191,7 +198,7 @@ String.prototype.toBase64 = function (): string | null
     }
 };
 
-String.prototype.fromBase64 = function <T = string>(): T | string | null
+String.prototype.fromBase64 = function <T = string>(_parseJson: boolean = false): T | string | null
 {
     if (this.length === 0)
         return null;
@@ -212,15 +219,21 @@ String.prototype.fromBase64 = function <T = string>(): T | string | null
             chaineDecodee = new TextDecoder().decode(octets);
         }
 
-        // Tente de parser en objet JSON, sinon renvoie la chaîne décodée brute
-        try
+        // Parse explicitement en JSON uniquement si demandé
+        if (_parseJson)
         {
-            return JSON.parse(chaineDecodee) as T;
-        } 
-        catch
-        {
-            return chaineDecodee;
+            try
+            {
+                return JSON.parse(chaineDecodee) as T;
+            } 
+            catch
+            {
+                // En cas d'échec du parsing JSON, on retourne la chaîne brute
+                return chaineDecodee;
+            }
         }
+
+        return chaineDecodee;
     } 
     catch (erreur)
     {
