@@ -93,7 +93,7 @@ Counts the total number of words in the string.
 
 ```ts
 let str = "I am a text. I am 1st John-Doe !";
-let count = str.countWord(); // 7
+let count = str.countWord(); // 8
 ```
 
 ### `truncate`

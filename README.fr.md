@@ -93,7 +93,7 @@ Compte le nombre total de mots dans la chaîne.
 
 ```ts
 let str = "I am a text. I am 1st John-Doe !";
-let count = str.countWord(); // 7
+let count = str.countWord(); // 8
 ```
 
 ### `truncate`
