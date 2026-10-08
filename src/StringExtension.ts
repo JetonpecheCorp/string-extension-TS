@@ -28,14 +28,12 @@ declare global
         toBase64(): string | null;
 
         /**
-         * Decodes a Base64 string back into a plain UTF-8 string.
-         * If `_parseJson` is true, it attempts to parse the decoded string as JSON.
+         * Decodes a Base64 string back into a plain UTF-8 string, or parses it as JSON if a generic type is provided.
          * 
-         * @param _parseJson - If true, tries to parse the result as JSON. Defaults to false.
          * @template T - The target type if the decoded string is expected to be a JSON object.
          * @returns The decoded string or parsed object, or `null` if decoding fails.
          */
-        fromBase64<T = string>(_parseJson?: boolean): T | string | null;
+        fromBase64<T = string>(): T | string | null;
 
         /**
          * Capitalizes the first letter of each word in the string.
@@ -198,9 +196,9 @@ String.prototype.toBase64 = function (): string | null
     }
 };
 
-String.prototype.fromBase64 = function <T = string>(_parseJson: boolean = false): T | string | null
+String.prototype.fromBase64 = function <T = string>(): T | string | null
 {
-    if (this.length === 0)
+    if (this.length == 0)
         return null;
 
     try
@@ -219,21 +217,15 @@ String.prototype.fromBase64 = function <T = string>(_parseJson: boolean = false)
             chaineDecodee = new TextDecoder().decode(octets);
         }
 
-        // Parse explicitement en JSON uniquement si demandé
-        if (_parseJson)
+        // Tente de parser en objet JSON, sinon renvoie la chaîne décodée brute
+        try
         {
-            try
-            {
-                return JSON.parse(chaineDecodee) as T;
-            } 
-            catch
-            {
-                // En cas d'échec du parsing JSON, on retourne la chaîne brute
-                return chaineDecodee;
-            }
+            return JSON.parse(chaineDecodee) as T;
+        } 
+        catch
+        {
+            return chaineDecodee;
         }
-
-        return chaineDecodee;
     } 
     catch (erreur)
     {

@@ -58,17 +58,18 @@ let base64 = str.toBase64();
 ```
 
 ### `fromBase64`
-Decodes a Base64 string back into a plain string. You can optionally pass `true` to attempt parsing the decoded string into a JSON object.
+
+Converts a base64 encoded string back to a regular string.  
+It automatically attempts to parse the decoded string as a JSON object if possible. You can provide a generic type `<T>` for the expected object structure.
 
 ```ts
-let base64 = "eyJuYW1lIjoiSm9obiJ9"; // {"name":"John"}
+// Basic string decoding
+let base64String = "U2FsdXQgamfDqXRhaXMgcGFzIGzDoA==";
+let decoded = base64String.fromBase64(); // "Salut j'étais pas là"
 
-// Returns a plain string
-let plainText = base64.fromBase64(); 
-
-// Parses the string as JSON and casts it to the generic type
-let obj = base64.fromBase64<Person>(true); 
-```
+// JSON object decoding
+let base64Json = "eyJuYW1lIjoiSm9obiIsImFnZSI6MzB9";
+let user = base64Json.fromBase64<User>(); // { name: "John", age: 30 }
 
 ### `toTitleCase`
 Capitalizes the first letter of every word in the string.

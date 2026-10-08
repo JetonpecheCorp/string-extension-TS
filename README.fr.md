@@ -58,17 +58,18 @@ let base64 = str.toBase64();
 ```
 
 ### `fromBase64`
-Décode une chaîne Base64 pour la transformer en chaîne de caractères ordinaire. Vous pouvez éventuellement passer `true` pour tenter d'analyser la chaîne décodée en tant qu'objet JSON.
+
+Convertit une chaîne codée en base64 en une chaîne normale.  
+Il tente automatiquement d'analyser la chaîne décodée en tant qu'objet JSON si possible. Vous pouvez fournir un type générique `<T>` pour la structure d'objet attendue.
 
 ```ts
-let base64 = "eyJuYW1lIjoiSm9obiJ9"; // {"name":"John"}
+// Basic string decoding
+let base64String = "U2FsdXQgamfDqXRhaXMgcGFzIGzDoA==";
+let decoded = base64String.fromBase64(); // "Salut j'étais pas là"
 
-// Retourne une chaîne de caractères ordinaire
-let plainText = base64.fromBase64();
-
-// Analyse la chaîne en tant que JSON et la convertit vers le type générique
-let obj = base64.fromBase64<Person>(true);
-```
+// JSON object decoding
+let base64Json = "eyJuYW1lIjoiSm9obiIsImFnZSI6MzB9";
+let user = base64Json.fromBase64<User>(); // { name: "John", age: 30 }
 
 ### `toTitleCase`
 Met en majuscule la première lettre de chaque mot de la chaîne.
