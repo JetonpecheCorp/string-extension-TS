@@ -70,6 +70,7 @@ let decoded = base64String.fromBase64(); // "Salut j'étais pas là"
 // JSON object decoding
 let base64Json = "eyJuYW1lIjoiSm9obiIsImFnZSI6MzB9";
 let user = base64Json.fromBase64<User>(); // { name: "John", age: 30 }
+```
 
 ### `toTitleCase`
 Met en majuscule la première lettre de chaque mot de la chaîne.
